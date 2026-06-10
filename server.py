@@ -1,8 +1,19 @@
-import runpod
+from flask import Flask, request, jsonify
+import requests
 
-def handler(job): prompt = job["input"].get("prompt", "")
+app = Flask(__name__)
 
-return { "response": f"AurX a reçu : {prompt}" } 
+RUNPOD_URL = "http://TON_ENDPOINT_RUNPOD/v1/chat"  # plus tard
 
-runpod.serverless.start({ "handler": handler })
+@app.route("/chat", methods=["POST"])
+def chat():
+    data = request.json
+    prompt = data.get("prompt", "")
 
+    # pour test sans model
+    return jsonify({
+        "response": f"AurX (Render): {prompt}"
+    })
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
