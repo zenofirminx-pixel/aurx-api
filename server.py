@@ -1,19 +1,8 @@
-from flask import Flask
+import runpod
 
-app = Flask(__name__)
+def handler(job): prompt = job["input"].get("prompt", "")
 
-@app.route("/")
-def home():
-    return {
-        "status": "online",
-        "name": "AurX API"
-    }
+return { "response": f"AurX a reçu : {prompt}" } 
 
-@app.route("/health")
-def health():
-    return {
-        "status": "healthy"
-    }
+runpod.serverless.start({ "handler": handler })
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=7860)
