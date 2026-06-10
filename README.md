@@ -1,4 +1,4 @@
-AurX API 
+##AurX API 
 
 Backend API for AurX using Qwen 2.5 GGUF and llama.cpp.
 
